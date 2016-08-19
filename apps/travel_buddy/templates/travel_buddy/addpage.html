@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Add Plan</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'travel_buddy/css/style.css' %}" media="screen" title="no title"  charset="utf-8">	
+</head>
+<body>
+	<div id="wrapper">
+	{% if messages %}
+		<ul class="messages">
+			{% for message in messages %}
+			<li>{{message}}</li>
+			{% endfor %}		
+		</ul>
+	{% endif %}
+	<h1 class="greeting">Add a Trip</h1>
+	<a id='home' href="/travels">Home</a>
+	<a id='logout' href="/logout">Logout</a>
+	<div class="form">
+		<form action="/addTrip" method="POST">
+			{% csrf_token %}
+				<table>
+					<tr>
+						<td>
+							<p>Destination:</p>
+						</td>
+						<td>
+							<input type="text" name="destination">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Description:</p>
+						</td>
+						<td>
+							<input type="text" name="description">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Travel Date From:</p>
+						</td>
+						<td>
+							<input type="text" name="start_date">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<p>Travel Date To:</p>
+						</td>
+						<td>
+							<input type="text" name="end_date">
+						</td>
+					</tr>
+				</table>
+				<input type="hidden" name="user_id" value="{{request.session.user.id}}">
+				<input type="submit" value="Add">
+			</form>
+		</div>
+	</div>
+</body>
+</html>

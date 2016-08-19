@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>Travel DashBoard</title>
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static 'travel_buddy/css/style.css' %}" media="screen" title="no title"  charset="utf-8">	
+</head>
+<body>
+	<div id="wrapper">
+		<h1 class="greeting">Hello, {{request.session.user.name}}!</h1>
+		<a id='logout' href="/logout">Logout</a>
+		<p><b>Your Trip Schedules</b></p>
+		<table class="pretty">
+			<tr>
+				<th>
+					Destination
+				</th>
+				<th>
+					Travel Start Date
+				</th>
+				<th>
+					Travel End Date
+				</th>
+				<th>
+					Plan
+				</th>
+			</tr>
+			{% for booking in bookings %}
+				{% if booking.user.id == request.session.user.id %}
+				<tr>
+					<td>
+						<a href="destination/{{booking.trip.id}}">
+							{{booking.trip.destination}}
+						</a>
+					</td>
+					<td>
+						{{booking.trip.start_date}}
+					</td>
+					<td>
+						{{booking.trip.end_date}}
+					</td>
+					<td>
+						{{booking.trip.description}}
+					</td>
+				</tr>
+				{% endif %}
+			{% endfor %}
+		</table>
+		<p><b>Other User's Travel Plans</b></p>
+		<table class="pretty">
+			<tr>
+				<th>
+					Name
+				</th>
+				<th>
+					Destination
+				</th>
+				<th>
+					Travel Start Date
+				</th>
+				<th>
+					Travel End Date
+				</th>
+				<th>
+					Do you want to join?
+				</th>
+			</tr>
+			{% for booking in bookings %}
+				{% if booking.user.id != request.session.user.id %}
+				<tr>
+					<td>
+						{{booking.user.name}}
+					</td>
+					<td>
+						<a href="destination/{{booking.trip.id}}">
+							{{booking.trip.destination}}
+						</a>
+					</td>
+					<td>
+						{{booking.trip.start_date}}
+					</td>
+					<td>
+						{{booking.trip.end_date}}
+					</td>
+					<td>
+						<a href="#">Join</a>
+					</td>
+				</tr>
+				{% endif %}
+			{% endfor %}
+		</table>
+		<a href="travels/add">Add Travel Plan</a>
+	</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+#wrapper{
+	padding: 20px;
+}
+#logout{
+	display: inline-block;
+	margin-left: 20px;
+}
+#home{
+	display: inline-block;
+	margin-left: 700px;
+}
+
+.greeting{
+	display: inline-block;
+}
+.form{
+	display: inline-block;
+	vertical-align: top;
+	margin:5px;
+	border: 1px solid black;
+}
+.form {
+	padding: 5px;
+}
+.pretty{
+	margin-top: 5px;
+	margin-bottom: 40px;
+	border: 1px solid black;
+	text-align: center;
+}
+.pretty th{
+	border: 1px solid black;
+	width: 200px;
+}
